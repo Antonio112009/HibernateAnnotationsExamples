@@ -20,7 +20,6 @@ import javax.persistence.*;
 @Table(name = "customer")
 public class Customer {
 
-
     @Id
     @GeneratedValue
     @Column(name = "country_id")
