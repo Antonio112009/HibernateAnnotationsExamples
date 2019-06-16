@@ -1,3 +1,11 @@
+/*
+ * Developed by Antonio112009 on 16/06/19 03:59
+ * Last Modified 16/06/19 03:24
+ * Copyright (c) 2019. All rights reserved
+ *
+ *
+ */
+
 package startApp.unidirectional.OneToOne.entities;
 
 import lombok.*;
@@ -9,8 +17,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "country")
-public class Country {
+@Table(name = "customer")
+public class Customer {
 
 
     @Id
@@ -20,8 +28,8 @@ public class Country {
 
     //Some code
 
-    @Column(name = "country")
-    private String country;
+    @Column(name = "customer_name")
+    private String customerName;
 
 
 }
