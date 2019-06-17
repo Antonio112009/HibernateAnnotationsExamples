@@ -43,7 +43,6 @@ public class OneToOneUniController {
             /*
             Hibernate itself created Tables "user" and "customer"
             Currently both tables are empty.
-
             */
 
             /*
@@ -135,7 +134,7 @@ public class OneToOneUniController {
 
             System.out.println(
                     "\n Look at the result in your database!\n" +
-                            "Now change in URL step=2 to step=1.\n"
+                            "Now change in URL step=2 to step=3.\n"
             );
         }
 
@@ -149,6 +148,7 @@ public class OneToOneUniController {
 
         if(step == 3 && oneToOneUniService.isUserExist("CaptainAmerica")){
 
+            System.out.println("Step 3:\n");
             /*
             Now last thing we can do with data - delete it.
 

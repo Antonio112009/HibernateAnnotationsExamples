@@ -10,8 +10,14 @@ package startApp.bidirectional.ManyToMany.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import startApp.bidirectional.ManyToMany.entities.Stockmarket;
 import startApp.bidirectional.ManyToMany.entities.Trader;
+
+import java.util.List;
 
 @Repository
 public interface TraderRepository extends CrudRepository<Trader, Long> {
+    List<Trader> findAll();
+
+    List<Trader> findTradersByStockmarket(Stockmarket stockmarket);
 }

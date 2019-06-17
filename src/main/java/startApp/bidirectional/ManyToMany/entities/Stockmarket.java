@@ -8,31 +8,28 @@
 
 package startApp.bidirectional.ManyToMany.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "stockmarket")
-public class Stockmarket {
+public class Stockmarket{
 
     @Id
     @GeneratedValue
     @Column(name = "stockmarket_id")
-    private long id;
+    private Long id;
 
     @Column(name = "stockmarket_name")
     private String stockmarketName;
 
     @ManyToMany(mappedBy="stockmarket")
-    private List<Trader> traders;
+    private List<Trader> traders = new ArrayList<>();
 
 }

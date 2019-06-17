@@ -8,16 +8,13 @@
 
 package startApp.bidirectional.ManyToMany.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -27,15 +24,15 @@ public class Trader {
     @Id
     @GeneratedValue
     @Column(name = "trader_id")
-    private int id;
+    private Long id;
 
     @Column(name = "trader_name")
     private String traderName;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(name = "TRADER_STOCKMARKET",
             joinColumns = { @JoinColumn(name = "trader_id") },
             inverseJoinColumns = { @JoinColumn(name = "stockmarket_id") })
-    private List<Stockmarket> stockmarket;
+    private List<Stockmarket> stockmarket = new ArrayList<>();
 
 }

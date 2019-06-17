@@ -11,7 +11,6 @@ package startApp.unidirectional.OneToOne.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import startApp.unidirectional.OneToOne.entities.User;
-import startApp.unidirectional.OneToOne.repository.CustomerRepository;
 import startApp.unidirectional.OneToOne.repository.UserRepository;
 
 @Service
@@ -19,9 +18,6 @@ public class OneToOneUniService {
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    CustomerRepository countryRepository;
 
     public void saveUser(User user){
          userRepository.save(user);

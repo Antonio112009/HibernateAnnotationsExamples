@@ -15,6 +15,8 @@ import startApp.bidirectional.ManyToMany.entities.Trader;
 import startApp.bidirectional.ManyToMany.repository.StockmarketRepository;
 import startApp.bidirectional.ManyToMany.repository.TraderRepository;
 
+import java.util.List;
+
 @Service
 public class ManyToManyBiService {
 
@@ -28,7 +30,19 @@ public class ManyToManyBiService {
         traderRepository.save(trader);
     }
 
+    public void saveStockmarket(Stockmarket stockmarket){
+        stockmarketRepository.save(stockmarket);
+    }
+
     public Stockmarket findByNameStockmarket(String name){
         return stockmarketRepository.findByStockmarketName(name);
+    }
+
+    public List<Stockmarket> findAllStockmarket(){
+        return stockmarketRepository.findAll();
+    }
+
+    public List<Trader> findAllTraders(){
+        return traderRepository.findAll();
     }
 }
