@@ -18,7 +18,6 @@ import startApp.bidirectional.ManyToMany.entities.Stockmarket;
 import startApp.bidirectional.ManyToMany.entities.Trader;
 import startApp.bidirectional.ManyToMany.service.ManyToManyBiService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,7 +34,7 @@ public class ManyToManyBiController {
         System.out.println("\n\n@ManyToMany bidirectional:\n\n");
 
         /**
-         * Saving new objects
+         * Saving new objects. Part 1
          */
         if(step == 1) {
 
@@ -62,27 +61,22 @@ public class ManyToManyBiController {
             stockmarket2.setStockmarketName("Avengers");
 
             /*
-            Creating Array list, where we add our stockmarkets
-             */
-            List<Stockmarket> stockmarketList = new ArrayList<>();
-            stockmarketList.add(stockmarket1);
-            stockmarketList.add(stockmarket2);
-
-            /*
             Obviously, inserting out stockmarketList into trader1.
              */
-            trader1.setStockmarket(stockmarketList);
-
+            trader1.addStockmarket(stockmarket1);
+            trader1.addStockmarket(stockmarket2);
 
             /*
             Let's see how our trader1 looks like:
              */
             System.out.println(trader1.toString() + "\n");
 
+
             /*
             Now, we saving our trader1 to the database
              */
             manyToManyBiService.saveTrader(trader1);
+
 
 
 
@@ -96,36 +90,31 @@ public class ManyToManyBiController {
             /*
             To add trader2 to existing stock - we need to get that stock from the database.
              */
-            Stockmarket stockmarketFromDatabase = manyToManyBiService.findByNameStockmarket("Avengers");
-
-
-
-            System.out.println("\n\n\n" + stockmarketFromDatabase.toString() + "\n\n\n");
-
-            List<Stockmarket> stockmarketList1 = manyToManyBiService.findAllStockmarket();
-
-
-
+            Stockmarket stockmarketFromDatabase = manyToManyBiService.findStockmarketByName("Avengers");
+            trader2.addStockmarket(stockmarketFromDatabase);
 
             /*
-            Adding that stockmarketFromDatabase to List.
-             */
-            stockmarketList = new ArrayList<>();
-            stockmarketList.add(stockmarketFromDatabase);
-
-            /*
-            Now we inserting out stockmarketList into trader2.
-             */
-            trader2.setStockmarket(stockmarketList);
-
-            /*
-            Save final data
+            Let's save
              */
             manyToManyBiService.saveTrader(trader2);
 
+            System.out.println(
+                    "\nLook at the result in your database!\n" +
+                            "Now change in URL step=1 to step=2.\n"
+            );
+
+            return null;
+        }
 
 
-            /*
+        /**
+         * Saving new objects. Part 1
+         */
+        if(step == 2){
+
+            System.out.println("Step 2:\n");
+
+             /*
             We tried to save Traders that were containing stockmarkets
             Now, let's try to save Stockmarket that contains traders to prove that our code is
             bidirectional
@@ -135,14 +124,55 @@ public class ManyToManyBiController {
             stockmarket3.setStockmarketName("Marvel");
             List<Trader> allTraders = manyToManyBiService.findAllTraders();
 
-            System.out.println("\n\n\n finally " + allTraders.toString() + "\n\n\n ");
-            stockmarket3.setTraders(allTraders);
+            /*
+            Well, we need to add "recursion" to every object... so we need for-loop in this case
+             */
+            for(Trader trader : allTraders){
+                stockmarket3.addTrader(trader);
+            }
 
             manyToManyBiService.saveStockmarket(stockmarket3);
 
 
             System.out.println("Look for result in the database.\n" +
-                    "there have to be two s");
+                    "Now change in URL step=2 to step=3.\n");
+        }
+
+        /**
+         * Modify/Edit data in Database
+         *
+         * First, do steps 1 and 2
+         */
+        if(step == 3){
+
+            System.out.println("\nStep 3:\n");
+            /*
+            To modify data, let's get it from the database
+            */
+
+            /*
+            First, let's check if we can get Traders object from Stockmarket
+            */
+            List<Trader> traderList = manyToManyBiService.findStockmarketByName("Avengers").getTraders();
+
+            System.out.println("\nChecking that we can get list of Traders from Stockmarket:\n" +
+                    "Stockmarket: Avengers\n" + traderList.toString() + "\n");
+
+            /*
+            Now, Let's check that we can get Stockmarkets from Trader.
+             */
+            List<Stockmarket> stockmarketList = manyToManyBiService.findTraderByName("Tony Stark").getStockmarkets();
+
+            System.out.println("\nChecking that we can get list of Stockmarkets from Trader:\n" +
+                    "Trader: Tony Stark\n" + stockmarketList.toString() + "\n");
+
+            /*
+            As we see, we can get data both ways (from Trader Stockmarket and from Stockmarket Trader)
+
+            This is how bidirectional works
+             */
+
+            return null;
         }
 
         return null;

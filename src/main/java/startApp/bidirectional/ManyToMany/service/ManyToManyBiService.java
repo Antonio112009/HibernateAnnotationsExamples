@@ -34,12 +34,12 @@ public class ManyToManyBiService {
         stockmarketRepository.save(stockmarket);
     }
 
-    public Stockmarket findByNameStockmarket(String name){
+    public Stockmarket findStockmarketByName(String name){
         return stockmarketRepository.findByStockmarketName(name);
     }
 
-    public List<Stockmarket> findAllStockmarket(){
-        return stockmarketRepository.findAll();
+    public Trader findTraderByName(String name){
+        return traderRepository.findByTraderName(name);
     }
 
     public List<Trader> findAllTraders(){

@@ -18,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = "traders")
 @Table(name = "stockmarket")
 public class Stockmarket{
 
@@ -29,7 +30,21 @@ public class Stockmarket{
     @Column(name = "stockmarket_name")
     private String stockmarketName;
 
-    @ManyToMany(mappedBy="stockmarket")
+    @ManyToMany(mappedBy="stockmarkets")
     private List<Trader> traders = new ArrayList<>();
+
+    /*
+    We need to add methods below to make everything work correctly
+     */
+
+    public void addTrader(Trader trader) {
+        traders.add(trader);
+        trader.getStockmarkets().add(this);
+    }
+
+    public void removeTrader(Trader trader) {
+        traders.remove(trader);
+        trader.getStockmarkets().remove(this);
+    }
 
 }

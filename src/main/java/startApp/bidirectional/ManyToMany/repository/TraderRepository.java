@@ -19,5 +19,5 @@ import java.util.List;
 public interface TraderRepository extends CrudRepository<Trader, Long> {
     List<Trader> findAll();
 
-    List<Trader> findTradersByStockmarket(Stockmarket stockmarket);
+    Trader findByTraderName(String name);
 }

@@ -18,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = "stockmarkets")
 @Table(name = "trader")
 public class Trader {
 
@@ -33,6 +34,21 @@ public class Trader {
     @JoinTable(name = "TRADER_STOCKMARKET",
             joinColumns = { @JoinColumn(name = "trader_id") },
             inverseJoinColumns = { @JoinColumn(name = "stockmarket_id") })
-    private List<Stockmarket> stockmarket = new ArrayList<>();
+    private List<Stockmarket> stockmarkets = new ArrayList<>();
+
+
+    /*
+    We need to add methods below to make everything work correctly
+     */
+
+    public void addStockmarket(Stockmarket stockmarket) {
+        stockmarkets.add(stockmarket);
+        stockmarket.getTraders().add(this);
+    }
+
+    public void removeStockmarket(Stockmarket stockmarket) {
+        stockmarkets.remove(stockmarket);
+        stockmarket.getTraders().remove(this);
+    }
 
 }
