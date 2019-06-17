@@ -48,7 +48,7 @@ public class Professor {
         student.setProfessor(this);
     }
 
-    public void removeComment(Student student) {
+    public void removeStudent(Student student) {
         students.remove(student);
         student.setProfessor(null);
     }

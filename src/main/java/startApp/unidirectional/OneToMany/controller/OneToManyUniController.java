@@ -40,7 +40,7 @@ public class OneToManyUniController {
          */
         if(step == 1) {
 
-            System.out.println("Step 1:\n");
+            System.out.println("\nStep 1:\n");
 
              /*
             Hibernate itself created Tables "post" and "comment" and "post_comment"
@@ -96,6 +96,8 @@ public class OneToManyUniController {
          */
 
         if(step == 2 && oneToManyUniService.isPostExist("Avengers")) {
+
+            System.out.println("\nStep 2:\n");
 
             /*
             To modify data, let's get it from the database
@@ -155,7 +157,7 @@ public class OneToManyUniController {
 
         if(step == 3 && oneToManyUniService.isPostExist("Avengers 2")){
 
-            System.out.println("Step 3:\n");
+            System.out.println("\nStep 3:\n");
 
             /*
             Let's delete last comment from database.
@@ -201,6 +203,8 @@ public class OneToManyUniController {
          * First, do steps 1,2 and 3
          */
         if(step == 4) {
+
+            System.out.println("\nStep 4:\n");
 
             /*
             Last thing to show: deleting data from Database

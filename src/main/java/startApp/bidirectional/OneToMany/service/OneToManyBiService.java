@@ -39,4 +39,8 @@ public class OneToManyBiService {
     public Student findStudentByName(String name){
         return studentRepository.findByName(name);
     }
+
+    public void deleteEveryoneByProfessorId(Long id){
+        professorRepository.deleteById(id);
+    }
 }

@@ -35,7 +35,7 @@ public class OneToManyBiController {
          */
         if(step == 1) {
 
-            System.out.println("Step 1:\n");
+            System.out.println("\nStep 1:\n");
 
              /*
             Hibernate itself created Tables "student" and "professor"
@@ -96,6 +96,7 @@ public class OneToManyBiController {
          */
         if(step == 2){
 
+            System.out.println("\nStep 2:\n");
             /*
             To modify data, let's get it from the database
             */
@@ -137,8 +138,86 @@ public class OneToManyBiController {
                     "\nLook at the result in your database!\n" +
                             "Now change in URL step=2 to step=3.\n"
             );
+
+            return null;
         }
 
+
+        /**
+         * Deleting objects from Database. Part1
+         *
+         * First, do steps 1 and 2
+         */
+        if(step == 3){
+
+            System.out.println("\nStep 3:\n");
+
+             /*
+            Last thing to show: deleting data from Database
+
+            Among others, CrudRepository contains two methods: deleteById and deleteAll.
+
+            See: https://www.baeldung.com/spring-data-jpa-delete
+            */
+
+            /*
+            Wow, last thing to test! Let's delete one of the student
+            */
+            Student studentFromDatabase = oneToManyBiService.findStudentByName("Tony Stark");
+
+            studentFromDatabase.getProfessor().removeStudent(studentFromDatabase);
+
+            oneToManyBiService.saveStudent(studentFromDatabase);
+
+            /*
+            Wait... What? We just saved object that we wanted to delete...
+            Well, logic is simple, we saving student, later we saving professor
+            in professor list of students one is missing, so hibernate would delete that missing one
+
+            Anyway, don't try this at home. I suggest to use more "save" thing:
+            1 - Get student
+            2 - extract professor from student
+            3 - delete student from professor
+            4 - save professor to the database
+            */
+
+            System.out.println(
+                    "\nLook at the result in your database!\n" +
+                            "Now change in URL step=3 to step=4.\n"
+            );
+            return null;
+        }
+
+
+        /**
+         * Deleting objects from database. Part2
+         *
+         * First, do steps 1,2 and 3
+         */
+        if(step == 4){
+            /*
+            Let's eras... delete everyone from database.
+
+            We will start by getting student object
+             */
+            Student studentFromDatabase = oneToManyBiService.findStudentByName("Steve Rogers");
+
+            /*
+            Extracting professor
+             */
+            Professor professor = studentFromDatabase.getProfessor();
+
+            /*
+            Now, let's delete everyone
+             */
+
+            oneToManyBiService.deleteEveryoneByProfessorId(professor.getId());
+
+            System.out.println(
+                    "\nLook at the result in your database!\n" +
+                            "We finished with @OneToMany bidirectional.\n"
+            );
+        }
 
 
 
