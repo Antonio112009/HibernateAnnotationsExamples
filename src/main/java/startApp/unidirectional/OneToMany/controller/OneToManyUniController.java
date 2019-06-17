@@ -17,7 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import startApp.unidirectional.OneToMany.entities.Comment;
 import startApp.unidirectional.OneToMany.entities.Post;
 import startApp.unidirectional.OneToMany.service.OneToManyUniService;
-import startApp.unidirectional.OneToOne.entities.User;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class OneToManyUniController {
     @GetMapping
     public ModelAndView OneToManyUniGet(@RequestParam(required = false, value="step") int step){
 
-        System.out.println("\n\n@OneToManyunidirectional:\n\n");
+        System.out.println("\n\n@OneToMany unidirectional:\n\n");
 
         /**
          * Saving new objects
@@ -80,7 +81,7 @@ public class OneToManyUniController {
             oneToManyUniService.savePost(post);
 
             System.out.println(
-                    "\n Look at the result in your database!\n" +
+                    "\nLook at the result in your database!\n" +
                             "Now change in URL step=1 to step=2.\n"
             );
             return null;
@@ -138,7 +139,7 @@ public class OneToManyUniController {
             oneToManyUniService.savePost(postFromDatabase);
 
             System.out.println(
-                    "\n Look at the result in your database!\n" +
+                    "\nLook at the result in your database!\n" +
                             "Now change in URL step=2 to step=3.\n"
             );
             return null;
@@ -187,7 +188,7 @@ public class OneToManyUniController {
             oneToManyUniService.savePost(postFromDatabase);
 
             System.out.println(
-                    "\n Look at the result in your database!\n" +
+                    "\nLook at the result in your database!\n" +
                             "We finished with @OneToOne unidirectional.\n"
             );
         }
@@ -220,7 +221,7 @@ public class OneToManyUniController {
             oneToManyUniService.deletePostById(postFromDatabase.getId());
 
             System.out.println(
-                    "\n Look at the result in your database!\n" +
+                    "\nLook at the result in your database!\n" +
                             "We finished with @OneToMany unidirectional.\n"
             );
 

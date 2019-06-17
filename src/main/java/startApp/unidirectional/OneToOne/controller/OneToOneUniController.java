@@ -77,7 +77,7 @@ public class OneToOneUniController {
             }
 
             System.out.println(
-                    "\n Look at the result in your database!\n" +
+                    "\nLook at the result in your database!\n" +
                             "Now change in URL step=1 to step=2.\n"
             );
 
@@ -133,7 +133,7 @@ public class OneToOneUniController {
             }
 
             System.out.println(
-                    "\n Look at the result in your database!\n" +
+                    "\nLook at the result in your database!\n" +
                             "Now change in URL step=2 to step=3.\n"
             );
         }
@@ -161,7 +161,7 @@ public class OneToOneUniController {
             oneToOneUniService.deleteUserById(userFromDatabase.getId());
 
             System.out.println(
-                    "\n Look at the result in your database!\n" +
+                    "\nLook at the result in your database!\n" +
                             "We finished with @OneToOne unidirectional.\n"
             );
         }
