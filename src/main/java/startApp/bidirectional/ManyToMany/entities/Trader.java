@@ -32,8 +32,7 @@ public class Trader {
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.DETACH
+            CascadeType.MERGE
     })
     @JoinTable(name = "TRADER_STOCKMARKET",
             joinColumns = { @JoinColumn(name = "trader_id") },
