@@ -45,4 +45,12 @@ public class ManyToManyBiService {
     public List<Trader> findAllTraders(){
         return traderRepository.findAll();
     }
+
+    public void deleteByIdTrader(Long id){
+        traderRepository.deleteById(id);
+    }
+
+    public void deleteByIdStockmarket(Long id){
+        stockmarketRepository.deleteById(id);
+    }
 }

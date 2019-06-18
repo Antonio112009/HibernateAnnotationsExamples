@@ -19,4 +19,6 @@ public interface StockmarketRepository extends CrudRepository<Stockmarket, Long>
     Stockmarket findByStockmarketName(String name);
 
     List<Stockmarket> findAll();
+
+    void deleteById(Long id);
 }

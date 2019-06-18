@@ -30,7 +30,11 @@ public class Trader {
     @Column(name = "trader_name")
     private String traderName;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH
+    })
     @JoinTable(name = "TRADER_STOCKMARKET",
             joinColumns = { @JoinColumn(name = "trader_id") },
             inverseJoinColumns = { @JoinColumn(name = "stockmarket_id") })

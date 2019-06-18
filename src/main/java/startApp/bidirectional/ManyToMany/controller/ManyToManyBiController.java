@@ -172,7 +172,77 @@ public class ManyToManyBiController {
             This is how bidirectional works
              */
 
+            /*
+            Let's modify data and save it
+             */
+            Trader traderFromDatabase = manyToManyBiService.findTraderByName("Tony Stark");
+            traderFromDatabase.getStockmarkets().get(0).setStockmarketName("Avengers:Endgame");
+
+            manyToManyBiService.saveTrader(traderFromDatabase);
+
+            /*
+            Let's modify another object and you would see all changes later in database
+             */
+            Stockmarket stockmarketfromDatabase = manyToManyBiService.findStockmarketByName("Marvel");
+            stockmarketfromDatabase.getTraders().get(1).setTraderName("Thanos");
+
+            manyToManyBiService.saveStockmarket(stockmarketfromDatabase);
+
+            System.out.println(
+                    "\nLook at the result in your database!\n" +
+                            "Now change in URL step=3 to step=4.\n"
+            );
+
             return null;
+        }
+
+
+        /**
+         * Deleting objects from Database.
+         *
+         * First, do steps 1, 2 and 3
+         */
+        if(step == 4){
+
+            System.out.println("\nStep 4:\n");
+
+            /*
+            Last thing to show: deleting data from Database
+
+            Among others, CrudRepository contains two methods: deleteById and deleteAll.
+
+            See: https://www.baeldung.com/spring-data-jpa-delete
+            */
+
+            /*
+            Let's get Trader and delete Trader.
+             */
+            Trader trader = manyToManyBiService.findTraderByName("Thanos");
+            manyToManyBiService.deleteByIdTrader(trader.getId());
+
+            /*
+            Wait what?! We deleted Trader with Stockmarkets,
+            but Stocksmarkets are still "alive"?
+
+            This is because we used CascadeType.PERSIST and CascadeType.MERGE instead of
+            Cascade.ALL
+             */
+
+
+            /*
+            Last thing to do - delete Stockmarket. But leave Traders "alive".
+             */
+            Stockmarket stockmarket = manyToManyBiService.findStockmarketByName("Marvel");
+            for(Trader trader1 : stockmarket.getTraders()){
+                trader1.getStockmarkets().remove(stockmarket);
+            }
+            manyToManyBiService.saveStockmarket(stockmarket);
+            manyToManyBiService.deleteByIdStockmarket(stockmarket.getId());
+
+            System.out.println(
+                    "\nLook at the result in your database!\n" +
+                            "We finished with @ManyToMany bidirectional.\n"
+            );
         }
 
         return null;

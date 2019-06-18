@@ -30,7 +30,7 @@ public class Stockmarket{
     @Column(name = "stockmarket_name")
     private String stockmarketName;
 
-    @ManyToMany(mappedBy="stockmarkets")
+    @ManyToMany( mappedBy="stockmarkets")
     private List<Trader> traders = new ArrayList<>();
 
     /*
